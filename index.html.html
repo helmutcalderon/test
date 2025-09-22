@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conviértete en Dueño de Casa en 4 Semanas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --bg-dark: #0D0D0D;
+        --bg-light: #f5f5f5;
+        --bg-card-dark: #1a1a1a;
+        --bg-card-light: #ffffff;
+        --text-dark: #111111;
+        --text-light: #f5f5f5;
+        --text-medium-dark: #a0a0a0;
+        --text-medium-light: #555555;
+        --accent-green: #00f53b;
+        --border-color-dark: #2a2a2a;
+        --border-color-light: #e0e0e0;
+        --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        font-family: var(--font-main);
+        line-height: 1.7;
+        font-weight: 400;
+        background-color: var(--bg-dark);
+        color: var(--text-medium-dark);
+        overflow-x: hidden;
+        position: relative;
+      }
+      .background-texture {
+        content: '';
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background-image: radial-gradient(circle at center, rgba(100, 100, 100, 0.08) 0%, rgba(13, 13, 13, 0) 50%),
+                          url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="1" height="1" fill="%23FFF" opacity="0.05"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grain)"/></svg>');
+        z-index: -1;
+        pointer-events: none;
+      }
+      .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+      
+      /* --- SPACING FIX --- */
+      /* Each section creates space ABOVE itself. No more double padding. */
+      .section {
+        padding: 0; /* Base reset */
+      }
+      .section-content-wrapper {
+        padding: 100px 0;
+      }
+      .hero .section-content-wrapper {
+        padding: 40px 0; /* Hero has custom padding */
+      }
+      
+      .highlight { color: var(--accent-green); background-color: transparent; }
+      h1, h2, h3 { color: var(--text-light); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; }
+      h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); letter-spacing: -0.03em; }
+      h2 { font-size: clamp(2.2rem, 5vw, 3.2rem); text-transform: uppercase; }
+      h3 { font-size: clamp(1.5rem, 4vw, 1.75rem); }
+      p { font-size: 1.1rem; }
+      
+      /* Hero Section (Dark) */
+      .hero {
+        background-color: transparent;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+      }
+      .hero-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+        width: 100%;
+      }
+      .hero-text h1 { margin-bottom: 20px; }
+      .hero-text p { color: var(--text-medium-dark); }
+      .hero-text p.hero-subtitle { font-size: 1.2rem; line-height: 1.6; margin-bottom: 20px; }
+      .hero-text p strong { color: var(--text-light); }
+      .form-container {
+        background: var(--bg-card-dark);
+        border: 1px solid var(--border-color-dark);
+        border-radius: 16px;
+        padding: 15px;
+        width: 100%;
+        max-width: 600px;
+        min-height: 600px;
+        display: flex;
+        flex-direction: column;
+        justify-self: center;
+        grid-column: 2 / 3;
+        grid-row: 1 / 3;
+      }
+      .form-embed { width: 100%; height: 600px; border: none; border-radius: 8px; transition: height 0.3s ease-in-out; }
+      .hero-extra-text { grid-row: 2 / 3; grid-column: 1 / 2; }
+      
+      /* General Components */
+      .section-header { text-align: center; margin-bottom: 80px; }
+      .section-header p { max-width: 800px; margin: 20px auto 0; font-size: 1.2rem; line-height: 1.6; }
+      .cta-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 18px 36px;
+        background: var(--accent-green);
+        color: #000;
+        text-decoration: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        transition: all 0.2s ease-in-out;
+        border: none;
+        margin-top: 20px;
+      }
+      .cta-button:hover { filter: brightness(0.9); transform: translateY(-3px); }
+      .text-center { text-align: center; }
+
+      /* Base Card Styles */
+      .testimonial-card, .process-card, .audience-point {
+        border-radius: 16px;
+        padding: 30px;
+      }
+      
+      /* --- Light Section Theme --- */
+      .section-light {
+        background-color: var(--bg-light);
+        color: var(--text-medium-light);
+      }
+      .section-light h1, .section-light h2, .section-light h3, .section-light strong { color: var(--text-dark); }
+      .section-light .highlight { background-color: var(--accent-green); color: var(--text-dark); padding: 0.1em 0.4em; border-radius: 6px; }
+      .section-light .testimonial-card, .section-light .process-card, .section-light .audience-point {
+        background-color: var(--bg-card-light);
+        border: 1px solid var(--border-color-light);
+      }
+      .section-light .video-placeholder-square { background-color: #e9ecef; }
+      .section-light .feature-photo-placeholder { background-color: #e9ecef; border-color: var(--border-color-light); }
+      .section-light .process-card h3 { border-color: var(--border-color-light); }
+      .section-light .process-card li { border-color: #eee; }
+      .section-light .founder-image { background-color: var(--bg-card-light); border-color: var(--accent-green);}
+      .section-light .cta-button:hover { background-color: var(--text-dark); color: var(--text-light); }
+      
+      /* Testimonials */
+      .video-testimonials { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin-top: 60px; }
+      .testimonial-card { text-align: center; background-color: var(--bg-card-dark); border: 1px solid var(--border-color-dark); }
+      .video-placeholder-square { width: 100%; padding-top: 100%; position: relative; background-color: #111; border-radius: 12px; margin-bottom: 25px; }
+      .play-button { width: 70px; height: 70px; background: var(--accent-green); color: var(--bg-dark); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; cursor: pointer; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); transition: all 0.3s ease; }
+      .play-button:hover { transform: translate(-50%, -50%) scale(1.1); filter: brightness(0.9); }
+      .testimonial-card .quote { font-size: 1.1rem; line-height: 1.6; }
+
+      /* Problem Section */
+      .reality-text { font-weight: 500; font-size: clamp(1.2rem, 3vw, 1.5rem); margin: 40px auto; line-height: 1.6; max-width: 800px; text-align: center; }
+
+      /* Features Section */
+      .features-grid { display: grid; grid-template-columns: 1fr; gap: 0; margin-top: 60px; }
+      .feature-item { display: flex; gap: 40px; align-items: center; padding: 40px 0; border-bottom: 1px solid var(--border-color-dark); }
+      .section-light .feature-item { border-color: var(--border-color-light); }
+      .features-grid .feature-item:last-child { border-bottom: none; }
+      .feature-item.reverse { flex-direction: row-reverse; }
+      .feature-photo-placeholder { width: 250px; height: 187px; max-width: 100%; flex-shrink: 0; background-color: var(--bg-card-dark); border-radius: 12px; border: 1px solid var(--border-color-dark); display: flex; align-items: center; justify-content: center; color: #666; font-weight: 700; font-size: 14px; text-transform: uppercase; }
+      .feature-content h3 { margin-bottom: 15px; }
+      .feature-content p { font-size: 1.1rem; }
+
+      /* Process Section */
+      .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 60px; }
+      .process-card { padding: 40px; background-color: var(--bg-card-dark); border: 1px solid var(--border-color-dark); }
+      .process-card h3 { font-size: 1rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid var(--border-color-dark); }
+      .process-card ul { list-style: none; }
+      .process-card li { padding: 10px 0 10px 30px; position: relative; border-bottom: 1px solid var(--border-color-dark); }
+      .process-card li:last-child { border-bottom: none; }
+      .process-card li::before { content: "✓"; color: var(--accent-green); font-weight: bold; position: absolute; left: 0; font-size: 1.4rem; }
+      
+      /* Story & Audience Sections */
+      .story-point { margin-bottom: 50px; text-align: left; }
+      .story-point:last-child { margin-bottom: 0; }
+      .story-label { font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
+      .text-content-block { max-width: 800px; margin: 0 auto; }
+      .audience-points { max-width: 800px; margin: 40px auto 0; text-align: left; }
+      .audience-point { padding: 25px; margin-bottom: 25px; background-color: var(--bg-card-dark); border: 1px solid var(--border-color-dark); }
+      .audience-point h3 { margin-bottom: 10px; }
+      
+      /* About Founder */
+      .founder-image { width: 250px; height: 250px; border-radius: 16px; margin: 60px auto 30px auto; border: 2px solid var(--accent-green); display: flex; align-items: center; justify-content: center; }
+
+      /* Footer */
+      .legal-footer { background: #000; color: #666; padding: 60px 20px; font-size: 12px; line-height: 1.6; text-align: center; }
+      .legal-content { max-width: 800px; margin: 0 auto; }
+      .legal-content p { margin-bottom: 15px; font-size: 12px; }
+      .legal-content strong { color: #aaa; }
+      .legal-content a { color: var(--text-light); text-decoration: none; }
+      .legal-content a:hover { text-decoration: underline; }
+
+      /* Responsive */
+      @media (max-width: 1024px) {
+        .hero-content { grid-template-columns: 1fr; text-align: center; }
+        .hero-text, .form-container, .hero-extra-text { grid-column: 1 / 2; grid-row: auto; }
+        .form-container { margin: 40px auto 0; }
+      }
+      @media (max-width: 768px) {
+        .section-content-wrapper { padding: 80px 0; }
+        .hero .section-content-wrapper { padding: 80px 0; }
+
+        .feature-item, .feature-item.reverse { flex-direction: column; text-align: center; }
+        .feature-photo-placeholder { margin-bottom: 30px; }
+        .two-col { grid-template-columns: 1fr; }
+        .hero { min-height: unset; }
+        .form-container { min-height: 450px; height: auto; padding: 10px; }
+        .form-embed { min-height: 450px; height: 100%; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="background-texture"></div>
+    <main>
+      <section class="section hero">
+        <div class="section-content-wrapper">
+          <div class="container">
+            <div class="hero-content">
+              <div class="hero-text">
+                <h1>Conviértete en Dueño de Casa en <span class="highlight">4 Semanas</span> Sin Afectar Tu Negocio</h1>
+                <p class="hero-subtitle">
+                  Descubre Si Calificas Para Nuestro Sistema de Doble Pre-Aprobación
+                </p>
+              </div>
+              <div class="form-container" id="quiz-form">
+                <iframe src="https://getformly.app/m12sFE" class="form-embed" allow="fullscreen" loading="lazy"></iframe>
+              </div>
+              <div class="hero-extra-text">
+                <p>
+                  Como emprendedor exitoso, generas más dinero que la mayoría de empleados. Pero los bancos siguen viéndote como "alto riesgo". El proceso hipotecario tradicional parece diseñado específicamente para rechazar a personas como tú.
+                </p>
+                <p><strong>Pero no tiene que ser así. Existe una forma completamente diferente.</strong></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-light testimonials-section">
+        <div class="section-content-wrapper">
+          <div class="container">
+            <div class="section-header">
+              <h2>Testimonios de Compradores que ya dieron el paso</h2>
+            </div>
+            <div class="video-testimonials">
+              <div class="testimonial-card">
+                <div class="video-placeholder-square">
+                  <div class="play-button">▶</div>
+                </div>
+                <strong>María González<br>Propietaria de Agencia de Marketing</strong>
+                <p class="quote">"Después de 3 rechazos con bancos tradicionales, el Sistema de Doble Pre-Aprobación me ayudó a conseguir mi casa en solo 3 semanas."</p>
+              </div>
+              <div class="testimonial-card">
+                <div class="video-placeholder-square">
+                  <div class="play-button">▶</div>
+                </div>
+                <strong>Carlos Mendoza<br>Dueño de Restaurante</strong>
+                <p class="quote">"Los bancos no entendían mis ingresos variables. Helmut encontró la ruta perfecta para mi situación específica."</p>
+              </div>
+            </div>
+            <div class="text-center">
+              <a href="#quiz-form" class="cta-button">Listo Para Ser Dueño de Casa</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section problem-section">
+        <div class="section-content-wrapper">
+          <div class="container">
+            <div class="section-header">
+              <h2>Este Sistema Es <span class="highlight">Diferente</span></h2>
+              <p>Has construido un negocio exitoso, pero hay un problema: los bancos no lo entienden. Cada aplicación, cada documento, cada explicación - todo se convierte en rechazo.</p>
+            </div>
+            <p class="reality-text">
+              <strong>Aquí está la brutal realidad:</strong> Ser autoempleado está matando tus posibilidades de aprobación, limitando tu patrimonio, y atrapándote en un ciclo infinito de alquileres.
+            </p>
+            <div class="text-center">
+              <a href="#quiz-form" class="cta-button">Listo Para Ser Dueño de Casa</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-light">
+        <div class="section-content-wrapper">
+          <div class="container">
+            <div class="section-header">
+              <h2>Aquí Está Lo Que Experimentarás con el Sistema de <span class="highlight">Doble Pre-Aprobación</span></h2>
+            </div>
+            <div class="features-grid">
+              <div class="feature-item">
+                <div class="feature-photo-placeholder">Foto</div>
+                <div class="feature-content">
+                  <h3>Acceso Directo al Loan Officer Que Resolvió Su Propio Problema</h3>
+                  <p>Trabajas directamente con Helmut Calderón, loan officer licenciado (NMLS) que creó este sistema después de ser rechazado múltiples veces como emprendedor. No es teoría - es la solución que él mismo necesitaba.</p>
+                </div>
+              </div>
+              <div class="feature-item reverse">
+                <div class="feature-photo-placeholder">Foto</div>
+                <div class="feature-content">
+                  <h3>Dos Rutas Simultáneas Desde el Día 1</h3>
+                  <p>Mientras otros loan officers te ofrecen una sola opción, nosotros activamos ruta tradicional Y no-tradicional en paralelo. Bank statements, DSCR, asset-based - duplicamos tus probabilidades de aprobación.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-photo-placeholder">Foto</div>
+                <div class="feature-content">
+                  <h3>Proceso Completamente Blindado en 4 Semanas</h3>
+                  <p>Portal inteligente donde subes documentos una sola vez. WhatsApp VIP con actualizaciones diarias. Calculadora exacta de cierre 24h antes. Sistema diseñado para eliminar sorpresas y rechazos de último minuto.</p>
+                </div>
+              </div>
+              <div class="feature-item reverse">
+                <div class="feature-photo-placeholder">Foto</div>
+                <div class="feature-content">
+                  <h3>Bonuses Valorados en $10,779 Sin Costo Adicional</h3>
+                  <p>Compra Blindada 360, guías de preparación financiera, protocolo anti-efectivo, blindaje post-cierre, y más. Todo incluido para asegurar que no solo consigas la aprobación, sino que cierres sin estrés.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-photo-placeholder">Foto</div>
+                <div class="feature-content">
+                  <h3><span class="highlight">Garantía Total:</span> Tu Éxito O Tu Dinero De Vuelta</h3>
+                  <p>Si el proceso falla por nuestra responsabilidad, reembolsamos todos tus costos. Si perdemos plazos, pagamos las consecuencias. Si no calificas o no cierras por cualquier motivo, no pagas absolutamente nada. Asumimos todo el riesgo - tú solo obtienes resultados.</p>
+                </div>
+              </div>
+            </div>
+            <div class="text-center">
+              <a href="#quiz-form" class="cta-button">Listo Para Ser Dueño de Casa</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-content-wrapper">
+          <div class="container">
+            <div class="section-header">
+              <h2>El QUÉ: Sistema de <span class="highlight">Doble Pre-Aprobación</span></h2>
+            </div>
+            <div class="two-col">
+              <div class="process-card">
+                <h3>RUTA 1: APROBACIÓN TRADICIONAL</h3>
+                <ul>
+                  <li><strong>Optimización:</strong> Maximizamos tu perfil para el sistema bancario convencional usando todas las fortalezas disponibles en tu documentación.</li>
+                  <li><strong>Preparación Estratégica:</strong> Organizamos tu historial financiero para presentar la imagen más sólida posible a underwriters tradicionales.</li>
+                  <li><strong>Timing Perfecto:</strong> Coordinamos la aplicación en el momento óptimo cuando tu perfil esté en su punto más fuerte para aprobación estándar.</li>
+                </ul>
+              </div>
+              <div class="process-card">
+                <h3>RUTA 2: APROBACIÓN NO-TRADICIONAL</h3>
+                <ul>
+                  <li><strong>Bank Statement Programs:</strong> Activamos préstamos basados en depósitos reales, no en tax returns que subestiman tus ingresos.</li>
+                  <li><strong>DSCR y Asset-Based:</strong> Utilizamos productos diseñados específicamente para emprendedores que generan efectivo real pero documentación "creativa."</li>
+                  <li><strong>Implementación Paralela:</strong> Ambos procesos corren simultáneamente desde el día 1, duplicando tus probabilidades mientras reduces el tiempo total.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="text-center">
+              <a href="#quiz-form" class="cta-button">Listo Para Ser Dueño de Casa</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-light story-section">
+        <div class="section-content-wrapper">
+          <div class="container">
+            <div class="section-header text-content-block">
+              <h2>Cómo Pasé de Ver <span class="highlight">Rechazos Diarios</span> a Crear el Sistema de Doble Pre-Aprobación</h2>
+            </div>
+            <div class="text-content-block">
+              <div class="story-point">
+                <div class="story-label">El Problema</div>
+                <p>En 2022, empecé a notar algo que me inquietaba profundamente. Día tras día, veía cómo mis compañeros rechazaban al 67% de emprendedores exitosos. Personas generando más dinero que empleados promedio siendo tratadas como fracasos financieros. Las estadísticas me obsesionaron: autoempleados con 3x más rechazos que empleados W-2. Como emprendedor yo mismo, esto me carcomía por dentro.</p>
+              </div>
+              <div class="story-point">
+                <div class="story-label">La Realización</div>
+                <p>El momento que cambió todo llegó cuando decidí revisar mi propia situación financiera usando los criterios tradicionales que aplicábamos diariamente. El shock fue devastador: ni siquiera yo, siendo loan officer exitoso Y emprendedor próspero, podría calificar para una hipoteca. En ese instante brutal entendí la horrible verdad. El sistema no estaba roto para nosotros, estaba específicamente diseñado para excluirnos.</p>
+              </div>
+              <div class="story-point">
+                <div class="story-label">La Solución</div>
+                <p>Me obsesione. Noches enteras investigando productos alternativos que mis colegas desconocían. Días documentando rutas no tradicionales que valoraran ingresos reales, no tax returns engañosos. Sistemáticamente construí lo que desesperadamente necesitábamos: un proceso de doble pre-aprobación que trabajara CON nuestra realidad empresarial, no contra ella.</p>
+              </div>
+              <div class="story-point">
+                <div class="story-label">El Resultado</div>
+                <p>Puse mi vida en juego y probé el sistema conmigo mismo. No solo conseguí mi primera casa. El proceso funcionó tan perfectamente que compramos nuestra segunda propiedad en menos de un año. Ahora dirijo el único sistema hipotecario diseñado específicamente por un loan officer emprendedor, para emprendedores. Entiendo ambos lados porque viví el problema y creé la solución.</p>
+              </div>
+              <div class="text-center">
+                <a href="#quiz-form" class="cta-button">Listo Para Ser Dueño de Casa</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-content-wrapper">
+          <div class="container">
+            <div class="section-header">
+              <h2>Para QUIÉN: Emprendedores listos para ser <span class="highlight">propietarios</span></h2>
+            </div>
+            <div class="audience-points">
+              <div class="audience-point">
+                <h3>Dominar Rutas Que Ignoran el Sistema Tradicional</h3>
+                <p>Aprende cómo identificar, activar y ejecutar productos hipotecarios diseñados específicamente para emprendedores que valoran ingresos reales, no documentación W-2.</p>
+              </div>
+              <div class="audience-point">
+                <h3>Crear Documentación Blindada Contra Rechazos</h3>
+                <p>Desarrolla preparación estratégica y frameworks que garantizan aprobaciones consistentes sin importar qué underwriter conservador revise tu expediente.</p>
+              </div>
+              <div class="audience-point">
+                <h3>Acelerar Construcción de Patrimonio Real</h3>
+                <p>Entiende cómo convertir tu éxito empresarial en propiedad inmobiliaria que genera riqueza, mientras el alquiler solo enriquece a otros.</p>
+              </div>
+            </div>
+            <div class="text-center">
+              <a href="#quiz-form" class="cta-button">Listo Para Ser Dueño de Casa</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-light about-section">
+        <div class="section-content-wrapper">
+          <div class="container text-content-block">
+            <div class="section-header">
+              <h2>Sobre Nuestro <span class="highlight">Fundador</span></h2>
+            </div>
+            <div class="founder-image">Helmut</div>
+            <p><strong>Helmut Calderón es el fundador del Sistema de Doble Pre-Aprobación, que ha logrado tasas de aprobación superiores al promedio de la industria específicamente porque eliminó la dependencia del proceso hipotecario tradicional para emprendedores.</strong></p>
+            <p>Su experiencia personal como emprendedor rechazado múltiples veces lo llevó a convertirse en loan officer licenciado (NMLS) y crear rutas alternativas que funcionan sistemáticamente sin depender de criterios W-2.</p>
+            <p>Su método de preparación financiera y documentación estratégica ha ayudado a cientos de emprendedores exitosos a conseguir sus casas cuando otros loan officers los rechazaban.</p>
+            <p><strong>Su misión: Ayudar a emprendedores prósperos a convertir su éxito empresarial en patrimonio inmobiliario real, no en alquileres eternos.</strong></p>
+          </div>
+        </div>
+      </section>
+      
+      <section class="section text-center">
+        <div class="section-content-wrapper">
+          <div class="container">
+            <a href="#quiz-form" class="cta-button">Listo Para Ser Dueño de Casa</a>
+          </div>
+        </div>
+      </section>
+
+    </main>
+    <footer class="legal-footer">
+      <div class="legal-content">
+        <p><strong>(LOGO EDGE HOME FINANCE)</strong></p>
+        <p>
+          Edge Home Finance Corp, is an Equal Housing Lender. As prohibited by federal law, we do not engage in business practices that discriminate on the basis of race, color, religion, national origin, sex, marital status, age (provided you have the capacity to enter into a binding contract), because all or part of your income may be derived from any public assistance program, or because you have, in good faith, exercised any right under the Consumer Credit Protection Act.
+        </p>
+        <p>The federal agency that administers our compliance with these federal laws is the Federal Trade Commission, Equal Credit Opportunity, Washington, DC, 20580. Edge Home Finance Corp is a licensed mortgage broker in the following states CA, CO, FL, MN, NC, ND, WI and TX.</p>
+        <p>
+          <strong>CALIFORNIA</strong> - Licensed by the Department of Business Oversight under California Finance Lenders Law
+        </p>
+        <p>
+          <strong>COLORADO</strong> - Edge Home Finance Corp, 4530 W 77th St Suite 365 Edina, MN 55435, (763) 219-8484; to check the license status of your mortgage broker, visit
+          <a href="http://www.dora.state.co.us/real-estate/index.htm" target="_blank" rel="noopener noreferrer">http://www.dora.state.co.us/real-estate/index.htm</a>
+        </p>
+        <p>
+          <strong>TEXAS</strong> - CONSUMERS WISHING TO FILE A COMPLAINT AGAINST A COMPANY OR A RESIDENTIAL MORTGAGE LOAN ORIGINATOR SHOULD COMPLETE AND SEND A COMPLAINT FORM TO THE TEXAS DEPARTMENT OF SAVINGS AND MORTGAGE LENDING, 2601 NORTH LAMAR, SUITE 201, AUSTIN, TEXAS 78705. COMPLAINT FORMS AND INSTRUCTIONS MAY BE OBTAINED FROM THE DEPARTMENT'S WEBSITE AT <a href="http://WWW.SML.TEXAS.GOV" target="_blank" rel="noopener noreferrer">WWW.SML.TEXAS.GOV</a>
+        </p>
+        <p>A TOLL-FREE CONSUMER HOTLINE IS AVAILABLE AT 1-877-276-5550.</p>
+        <p>
+          THE DEPARTMENT MAINTAINS A RECOVERY FUND TO MAKE PAYMENTS OF CERTAIN ACTUAL OUT OF POCKET DAMAGES SUSTAINED BY BORROWERS CAUSED BY ACTS OF LICENSED RESIDENTIAL MORTGAGE LOAN ORIGINATORS. A WRITTEN APPLICATION FOR REIMBURSEMENT FROM THE RECOVERY FUND MUST BE FILED WITH AND INVESTIGATED BY THE DEPARTMENT PRIOR TO THE PAYMENT OF A CLAIM. FOR MORE INFORMATION ABOUT THE RECOVERY FUND, PLEASE CONSULT THE DEPARTMENT'S WEBSITE AT
+          <a href="http://WWW.SML.TEXAS.GOV" target="_blank" rel="noopener noreferrer">WWW.SML.TEXAS.GOV</a>
+        </p>
+      </div>
+    </footer>
+    <script>
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth"
+            });
+          }
+        });
+      });
+      
+      // Dynamic Iframe Height Adjustment
+      window.addEventListener("message", function (e) {
+        if (e.data.type === "resize" && e.data.height) {
+          const iframe = document.querySelector(".form-embed");
+          const container = document.querySelector(".form-container");
+          if (iframe && e.data.height > 300) {
+            const newHeight = e.data.height + "px";
+            iframe.style.height = newHeight;
+            if (window.innerWidth <= 768) {
+               container.style.minHeight = newHeight;
+            }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
